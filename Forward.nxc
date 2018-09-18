@@ -1,4 +1,8 @@
-task main () {
-    OnFwd(OUT_AB, 100);
-    Wait(3000);
+task main() {
+SetSensorLowspeed(IN_2); 
+while(true) {
+    until(SensorUS (IN_2) < 15); 
+    OnFwd(OUT_AB, 75); 
+    Off(OUT_A); 
+}
 }
