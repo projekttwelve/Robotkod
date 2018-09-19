@@ -1,0 +1,13 @@
+
+sub turnRight(int degree){
+   RotateMotor(OUT_B, 50, degree);
+}
+sub turnLeft(int degree){
+   RotateMotor(OUT_A, 50, degree);
+}
+task main(){
+turnRight(360);
+
+//Wait(1000);
+turnLeft(360);
+}
