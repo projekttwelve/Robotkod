@@ -22,7 +22,7 @@ SetSensorLowspeed(IN_2);
 }
 
 
-int move_forward(int distance) {
+int moveForward(int distance) {
     SetSensorLowspeed(IN_4); 
     while(true) {
         until(SensorUS (IN_4) < distance); 
