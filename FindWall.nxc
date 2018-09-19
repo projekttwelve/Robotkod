@@ -1,0 +1,17 @@
+void FindWall();
+
+task main () {
+ FindWall();
+}
+
+void FindWall()
+{
+SetSensorLowspeed(IN_2);
+    float dist = SensorUS(IN_2);
+    while(dist>50)
+    {
+           OnFwd(OUT_A,10);
+           OnFwd(OUT_B,-10);
+    }
+    Off(OUT_AB);
+}
