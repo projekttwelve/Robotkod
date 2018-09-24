@@ -1,0 +1,44 @@
+void function1();
+void function2();
+
+task main(){
+
+     SetSensorTouch(IN_1);
+     int count=0;
+
+     long t0, time;
+     t0 = CurrentTick();
+     while(CurrentTick()-t0>=3000);
+     {
+     if (SENSOR_1==1){
+     count = count + 1;
+     }
+     }
+     
+     if (count == 1){
+        function1();
+     }
+     
+     if (count == 2){
+        function2();
+     }
+     
+     if (count == 3){
+     }
+     
+     if (count == 4){
+     }
+}
+
+void function1()
+{
+OnFwd(OUT_AB,10);
+}
+
+void function2()
+{
+OnFwd(OUT_AB,-10);
+}
+
+void function3(){
+}
