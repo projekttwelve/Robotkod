@@ -6,12 +6,18 @@ task main () {
 
 void FindWall()
 {
-SetSensorLowspeed(IN_2);
-    float dist = SensorUS(IN_2);
-    while(dist>50)
+    SetSensorLowspeed(IN_4);
+    while(SensorUS (IN_4) > 53)
     {
-           OnFwd(OUT_A,10);
-           OnFwd(OUT_B,-10);
+           OnFwd(OUT_A,25);
+           OnFwd(OUT_B,-25);
+    }
+    float dist = 100;
+    while(SensorUS (IN_4)< dist)
+    {
+           dist = SensorUS (IN_4);
+           RotateMotor(OUT_A, 10, 15);
+           RotateMotor(OUT_B, -10, 15);
     }
     Off(OUT_AB);
 }
