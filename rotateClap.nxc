@@ -1,0 +1,36 @@
+void FindWall();
+void lisenForSound();
+
+main()
+{
+FindWall();
+lisenForSound();
+}
+
+task lisenForSound()
+{
+    SetSensorSound(IN_2)
+    while(trSe) 
+    {
+        if(SENSOR_2 > 40)
+        {
+            RotateMotor(OUT_B, 10, 15);
+            RotateMotor(OUT_A, -10, 15);
+            Wait(2000);
+        }
+    }
+}
+
+void FindWall()
+{
+SetSensorLowspeed(IN_4);
+    float dist = SensorUS(IN_4);
+    while (SensorUS (IN_4) > 53 )
+    {
+        OnFwd(OUT_A, 25);
+        OnFwd(OUT_B, -25);
+    }
+}
+
+
+
