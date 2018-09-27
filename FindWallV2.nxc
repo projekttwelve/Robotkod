@@ -1,0 +1,28 @@
+void FindWall();
+
+task main () {
+ FindWall();
+}
+
+void FindWall()
+{
+    SetSensorLowspeed(IN_4);
+    int CountDegrees = 0;
+    int DegreeShortestDistance;
+    int DegreesFromWall;
+    float ShortestDistance = 100.0;
+    while( CountDegrees <= 360)
+    {
+        if (SensorUS (IN_4)< ShortestDistance)
+        {
+           ShortestDistance = SensorUS (IN_4);
+           DegreeShortestDistance = CountDegrees;
+        }
+        RotateMotor(OUT_A, 25, 10);
+        RotateMotor(OUT_B, -25, 10);
+        CountDegrees = CountDegrees+5;
+    }
+    DegreesFromWall = (DegreeShortestDistance*2);
+    RotateMotor(OUT_A,  50, DegreesFromWall);
+    RotateMotor(OUT_B,  -50, DegreesFromWall);
+}
