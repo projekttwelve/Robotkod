@@ -1,0 +1,63 @@
+void function1();
+void function2();
+void function3();
+void function4();
+
+task main(){
+
+     SetSensorType(IN_1,SENSOR_TYPE_TOUCH);
+     SetSensorMode(IN_1,SENSOR_MODE_PULSE);
+
+     int count=0;
+     long t0;
+     t0 = CurrentTick();
+     
+     while(CurrentTick()-t0 <3000);{
+         ClearSensor(IN_1);
+         if (SENSOR_1 == 1){
+            count == 1;
+         }
+         
+         if (SENSOR_1 == 2){
+            count == 2;
+         }
+     }
+
+     if (count == 0){
+        function1();
+     }
+     
+     if (count == 1){
+        function2();
+     }
+     
+     if (count == 2){
+        function3();
+     }
+     
+     if (count == 3){
+        function4();
+     }
+}
+
+void function1()
+{
+     OnFwd(OUT_AB,30);
+}
+
+void function2()
+{
+     OnFwd(OUT_AB,-30);
+}
+
+void function3()
+{
+     OnFwd(OUT_A,30);
+     OnFwd(OUT_B,-30);
+}
+
+void function4()
+{
+     OnFwd(OUT_A,30);
+     OnFwd(OUT_B,-30);
+}
