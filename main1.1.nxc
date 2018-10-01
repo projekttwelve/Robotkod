@@ -2,6 +2,7 @@ void FindWall();
 void MoveForward();
 sub turnRight(int degree);
 sub turnLeft(int degree);
+void moveForwardnDrop();
 
 task main(){
 
@@ -26,23 +27,33 @@ task main(){
      }
 
      if (count == 0){
-
+        FindWall();
+        MoveForward();
+        turnRight(360);
+        moveForwardnDrop();
      }
 
      if (count == 1){
         FindWall();
         MoveForward();
-        turnRight(360);
+        turnLeft(360);
+        MoveForwardnDrop();
      }
 
      if (count == 2){
         FindWall();
         MoveForward();
-        turnLeft(360);
+        turnLeft(720);
+        MoveForward();
+        MoveForwardnDrop();
      }
 
      if (count == 3){
-
+        FindWall();
+        MoveForward();
+        turnLeft(720);
+        MoveForward();
+        moveForwardnDrop();
      }
 }
 
@@ -82,4 +93,14 @@ sub turnRight(int degree){
 }
 sub turnLeft(int degree){
    RotateMotor(OUT_A, 50, degree);
+}
+
+void moveForwardnDrop(){
+    onFwd(OUT_AB, 50);
+    Wait(3000);
+    Off(OUT_AB);
+    OnFwd(OUT_C, -100);
+    Wait(3000);
+    OnFwd(OUT_C, 100);
+    Wait(3000);
 }
