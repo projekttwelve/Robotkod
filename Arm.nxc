@@ -1,4 +1,6 @@
 task main () {
     OnFwd(OUT_C,-100);
     Wait(3000);
+    OnFwd(OUT_C,100);
+    Wait(3000);
 }
