@@ -42,17 +42,17 @@ task main(){
 
      if (count == 2){
         FindWall();
-        MoveForward();
         turnLeft(720);
         MoveForward();
+        turnRight(320);
         MoveForwardnDrop();
      }
 
      if (count == 3){
         FindWall();
-        MoveForward();
         turnLeft(720);
         MoveForward();
+        turnLeft(320);
         moveForwardnDrop();
      }
 }
