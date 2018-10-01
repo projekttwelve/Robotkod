@@ -1,44 +1,85 @@
-void function1();
-void function2();
+void FindWall();
+void MoveForward();
+sub turnRight(int degree);
+sub turnLeft(int degree);
 
 task main(){
 
-     SetSensorTouch(IN_1);
+     SetSensorType(IN_1,SENSOR_TYPE_TOUCH);
+     SetSensorMode(IN_1,SENSOR_MODE_PULSE);
+
      int count=0;
-
-     long t0, time;
+     long t0;
      t0 = CurrentTick();
-     while(CurrentTick()-t0>=3000);
-     {
-     if (SENSOR_1==1){
-     count = count + 1;
+
+     while(CurrentTick()-t0 <3000);{
+         if (SENSOR_1 == 1){
+            count = 1;
+         }
+
+         if (SENSOR_1 == 2){
+            count = 2;
+         }
+         if (SENSOR_1 == 3){
+            count = 3;
+         }
      }
+
+     if (count == 0){
+
      }
-     
+
      if (count == 1){
-        function1();
+        FindWall();
+        MoveForward();
+        turnRight(360);
      }
-     
+
      if (count == 2){
-        function2();
+        FindWall();
+        MoveForward();
+        turnLeft(360);
      }
-     
+
      if (count == 3){
-     }
-     
-     if (count == 4){
+
      }
 }
 
-void function1()
+void FindWall()
 {
-OnFwd(OUT_AB,10);
+    SetSensorLowspeed(IN_4);
+    int CountDegrees = 0;
+    int DegreeShortestDistance;
+    int DegreesFromWall;
+    float ShortestDistance = 100.0;
+    while( CountDegrees <= 360)
+    {
+        if (SensorUS (IN_4)< ShortestDistance)
+        {
+           ShortestDistance = SensorUS (IN_4);
+           DegreeShortestDistance = CountDegrees;
+        }
+        RotateMotor(OUT_A, 25, 10);
+        RotateMotor(OUT_B, -25, 10);
+        CountDegrees = CountDegrees+5;
+    }
+    DegreesFromWall = (DegreeShortestDistance*2);
+    RotateMotor(OUT_A,  50, DegreesFromWall);
+    RotateMotor(OUT_B,  -50, DegreesFromWall);
+}
+void MoveForward(){
+    SetSensorLowspeed(IN_4);
+    while(SensorUS (IN_4) > 15 ) {
+        OnFwd(OUT_AB, 75);
+}
+    Off(OUT_AB);
+
 }
 
-void function2()
-{
-OnFwd(OUT_AB,-10);
+sub turnRight(int degree){
+   RotateMotor(OUT_B, 50, degree);
 }
-
-void function3(){
+sub turnLeft(int degree){
+   RotateMotor(OUT_A, 50, degree);
 }
