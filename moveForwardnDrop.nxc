@@ -1,102 +1,10 @@
-void FindWall();
-void MoveForward();
-sub turnRight(int degree);
-sub turnLeft(int degree);
 void moveForwardnDrop();
 
-task main(){
-
-     SetSensorType(IN_1,SENSOR_TYPE_TOUCH);
-     SetSensorMode(IN_1,SENSOR_MODE_PULSE);
-
-     int count=0;
-     long t0;
-     t0 = CurrentTick();
-
-     while(CurrentTick()-t0 <3000);{
-         if (SENSOR_1 == 1){
-            count = 1;
-         }
-
-         if (SENSOR_1 == 2){
-            count = 2;
-         }
-         if (SENSOR_1 == 3){
-            count = 3;
-         }
-     }
-
-     if (count == 0){
-        FindWall();
-        MoveForward();
-        turnRight(360);
-        moveForwardnDrop();
-     }
-
-     if (count == 1){
-        FindWall();
-        MoveForward();
-        turnLeft(360);
-        MoveForwardnDrop();
-     }
-
-     if (count == 2){
-        FindWall();
-        turnLeft(720);
-        MoveForward();
-        turnRight(320);
-        MoveForwardnDrop();
-     }
-
-     if (count == 3){
-        FindWall();
-        turnLeft(720);
-        MoveForward();
-        turnLeft(320);
-        moveForwardnDrop();
-     }
-}
-
-void FindWall()
-{
-    SetSensorLowspeed(IN_4);
-    int CountDegrees = 0;
-    int DegreeShortestDistance;
-    int DegreesFromWall;
-    float ShortestDistance = 100.0;
-    while( CountDegrees <= 360)
-    {
-        if (SensorUS (IN_4)< ShortestDistance)
-        {
-           ShortestDistance = SensorUS (IN_4);
-           DegreeShortestDistance = CountDegrees;
-        }
-        RotateMotor(OUT_A, 25, 10);
-        RotateMotor(OUT_B, -25, 10);
-        CountDegrees = CountDegrees+5;
+main(){
+    moveForwardnDrop();
     }
-    DegreesFromWall = (DegreeShortestDistance*2);
-    RotateMotor(OUT_A,  50, DegreesFromWall);
-    RotateMotor(OUT_B,  -50, DegreesFromWall);
-}
-void MoveForward(){
-    SetSensorLowspeed(IN_4);
-    while(SensorUS (IN_4) > 15 ) {
-        OnFwd(OUT_AB, 75);
-}
-    Off(OUT_AB);
-
-}
-
-sub turnRight(int degree){
-   RotateMotor(OUT_B, 50, degree);
-}
-sub turnLeft(int degree){
-   RotateMotor(OUT_A, 50, degree);
-}
-
 void moveForwardnDrop(){
-    onFwd(OUT_AB, 50);
+    OnFwd(OUT_AB, 50);
     Wait(3000);
     Off(OUT_AB);
     OnFwd(OUT_C, -100);
