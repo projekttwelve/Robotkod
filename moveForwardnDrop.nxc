@@ -96,7 +96,8 @@ sub turnLeft(int degree){
 }
 
 void moveForwardnDrop(){
-    RotateMotor(OUT_AB, 100, 5040);
+    onFwd(OUT_AB, 50);
+    Wait(3000);
     Off(OUT_AB);
     OnFwd(OUT_C, -100);
     Wait(3000);
