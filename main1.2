@@ -17,7 +17,6 @@ task main(){
          if (SENSOR_1 == 1){
             count = 1;
          }
-
          if (SENSOR_1 == 2){
             count = 2;
          }
@@ -30,7 +29,7 @@ task main(){
         FindWall();
         MoveForward();
         turnRight(360);
-        //moveForwardnDrop();
+        moveForwardnDrop();
      }
 
      if (count == 1){
@@ -82,10 +81,9 @@ void FindWall()
 void MoveForward(){
     SetSensorLowspeed(IN_4);
     while(SensorUS (IN_4) > 15 ) {
-        OnFwd(OUT_AB, 75);
+        OnFwdSync(OUT_AB,75,0);
 }
     Off(OUT_AB);
-
 }
 
 sub turnRight(int degree){
