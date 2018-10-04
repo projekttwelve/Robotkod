@@ -103,8 +103,10 @@ sub turnLeft(int degree){
    RotateMotor(OUT_A, 50, degree);
 }
 
-void moveForwardnDrop(){
+void moveForward2(){
     RotateMotorEx(OUT_AB, 100, 5040, 0, true, false);
-    Wait(10000);
-    OnFwd(OUT_C, -100);
+}
+
+void drop(){
+     OnFwd(OUT_C,-100);
 }
