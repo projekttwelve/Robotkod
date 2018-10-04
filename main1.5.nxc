@@ -56,10 +56,8 @@ task main(){
      if (count == 2){
         FindWall();
         turnLeft(720);
-        moveForward2();
-        moveForward2();
-        FindWall();
         MoveForward();
+        FindWall();        
         turnRight(360);
         moveForward2();
         FindWall();
@@ -74,10 +72,8 @@ task main(){
      if (count == 3){
         FindWall();
         turnLeft(720);
-        moveForward2();
-        moveForward2();
-        FindWall();
         MoveForward();
+        FindWall();       
         turnLeft(360);
         moveForward2();
         FindWall();
