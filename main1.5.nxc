@@ -59,7 +59,7 @@ task main(){
 
      if (count == 2){
         FindWall();
-        turnLeft(705);
+        turnLeft(690);
         MoveForward();
         FindWall();
         turnRight(360);
@@ -76,7 +76,7 @@ task main(){
 
      if (count == 3){
         FindWall();
-        turnLeft(705);
+        turnLeft(690);
         MoveForward();
         FindWall();
         turnLeft(300);
@@ -100,26 +100,26 @@ void FindWall()
            OnFwd(OUT_B,-25);
     }
     float dist = SensorUS (IN_4);
-    RotateMotor(OUT_A, 75, 10);
-    RotateMotor(OUT_B, -75,10);
+    RotateMotor(OUT_A, 95, 10);
+    RotateMotor(OUT_B, -95,10);
 
     if(SensorUS (IN_4)<dist){
         while(SensorUS (IN_4)< dist)
         {
            dist = SensorUS (IN_4);
-           RotateMotor(OUT_A, 75, 20);
-           RotateMotor(OUT_B, -75,20);
+           RotateMotor(OUT_A, 95, 20);
+           RotateMotor(OUT_B, -95,20);
         }
     }
     else
     {
-       RotateMotor(OUT_A, -75, 20);
-       RotateMotor(OUT_B, 75,20);
+       RotateMotor(OUT_A, -95, 20);
+       RotateMotor(OUT_B, 95,20);
        while(SensorUS (IN_4)< dist)
         {
            dist = SensorUS (IN_4);
-           RotateMotor(OUT_A, -75, 20);
-           RotateMotor(OUT_B, 75,20);
+           RotateMotor(OUT_A, -95, 20);
+           RotateMotor(OUT_B, 95,20);
         }
     }
 }
