@@ -1,0 +1,110 @@
+void FindWall();
+void MoveForward();
+sub turnRight(int degree);
+sub turnLeft(int degree);
+void moveForwardnDrop();
+
+task main(){
+
+     SetSensorType(IN_1,SENSOR_TYPE_TOUCH);
+     SetSensorMode(IN_1,SENSOR_MODE_PULSE);
+
+     int count=0;
+     long t0;
+     t0 = CurrentTick();
+
+     while(CurrentTick()-t0 <3000);{
+         if (SENSOR_1 == 1){
+            count = 1;
+         }
+         if (SENSOR_1 == 2){
+            count = 2;
+         }
+         if (SENSOR_1 == 3){
+            count = 3;
+         }
+     }
+
+     if (count == 0){
+        FindWall();
+        MoveForward();
+        turnRight(360);
+        moveForwardnDrop();
+     }
+
+     if (count == 1){
+        FindWall();
+        MoveForward();
+        turnLeft(360);
+        moveForwardnDrop();
+     }
+
+     if (count == 2){
+        FindWall();
+        turnLeft(720);
+        MoveForward();
+        turnRight(360);
+        moveForwardnDrop();
+     }
+
+     if (count == 3){
+        FindWall();
+        turnLeft(720);
+        MoveForward();
+        turnLeft(360);
+        moveForwardnDrop();
+     }
+}
+
+void FindWall()
+{
+    SetSensorLowspeed(IN_4);
+    while(SensorUS (IN_4) > 53)
+    {
+           OnFwd(OUT_A,25);
+           OnFwd(OUT_B,-25);
+    }
+    float dist = SensorUS (IN_4);
+    RotateMotor(OUT_A, 25, 10);
+    RotateMotor(OUT_B, -25,10);
+
+    if(SensorUS (IN_4)<dist){
+        while(SensorUS (IN_4)< dist)
+        {
+           dist = SensorUS (IN_4);
+           RotateMotor(OUT_A, 25, 20);
+           RotateMotor(OUT_B, -25,20);
+        }
+    }
+    else
+    {
+       RotateMotor(OUT_A, -25, 20);
+       RotateMotor(OUT_B, 25,20);
+       while(SensorUS (IN_4)< dist)
+        {
+           dist = SensorUS (IN_4);
+           RotateMotor(OUT_A, -25, 20);
+           RotateMotor(OUT_B, 25,20);
+        }
+    }
+}
+void MoveForward(){
+    SetSensorLowspeed(IN_4);
+    while(SensorUS (IN_4) > 15 ) {
+        OnFwdSync(OUT_AB,75,0);
+}
+    Off(OUT_AB);
+}
+
+sub turnRight(int degree){
+   RotateMotor(OUT_B, 50, degree);
+}
+sub turnLeft(int degree){
+   RotateMotor(OUT_A, 50, degree);
+}
+
+void moveForwardnDrop(){
+    RotateMotorEx(OUT_AB, 100, 5040, 0, true, false);
+    Wait(10000);
+    OnFwd(OUT_C, -100);
+}
