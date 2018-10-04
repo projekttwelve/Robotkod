@@ -33,6 +33,7 @@ task main(){
         moveForward2();
         FindWall();
         MoveForward();
+        FindWall();
         turnRight(360);
         moveForward2();
         FindWall();
@@ -43,10 +44,13 @@ task main(){
      if (count == 1){
         FindWall();
         MoveForward();
-        turnLeft(360);
+        turnLeft(300);
         moveForward2();
         FindWall();
-        turnLeft(360);
+        MoveForward();
+        FindWall();
+        MoveForward();
+        turnLeft(300);
         moveForward2();
         FindWall();
         MoveForward();
@@ -55,13 +59,14 @@ task main(){
 
      if (count == 2){
         FindWall();
-        turnLeft(720);
+        turnLeft(705);
         MoveForward();
-        FindWall();        
+        FindWall();
         turnRight(360);
         moveForward2();
         FindWall();
         MoveForward();
+        FindWall();
         turnRight(360);
         moveForward2();
         FindWall();
@@ -71,14 +76,14 @@ task main(){
 
      if (count == 3){
         FindWall();
-        turnLeft(720);
+        turnLeft(705);
         MoveForward();
-        FindWall();       
-        turnLeft(360);
+        FindWall();
+        turnLeft(300);
         moveForward2();
         FindWall();
         MoveForward();
-        turnLeft(360);
+        turnLeft(300);
         moveForward2();
         FindWall();
         MoveForward();
@@ -89,32 +94,32 @@ task main(){
 void FindWall()
 {
     SetSensorLowspeed(IN_4);
-    while(SensorUS (IN_4) > 53)
+    while(SensorUS (IN_4) > 55)
     {
            OnFwd(OUT_A,25);
            OnFwd(OUT_B,-25);
     }
     float dist = SensorUS (IN_4);
-    RotateMotor(OUT_A, 25, 10);
-    RotateMotor(OUT_B, -25,10);
+    RotateMotor(OUT_A, 75, 10);
+    RotateMotor(OUT_B, -75,10);
 
     if(SensorUS (IN_4)<dist){
         while(SensorUS (IN_4)< dist)
         {
            dist = SensorUS (IN_4);
-           RotateMotor(OUT_A, 25, 20);
-           RotateMotor(OUT_B, -25,20);
+           RotateMotor(OUT_A, 75, 20);
+           RotateMotor(OUT_B, -75,20);
         }
     }
     else
     {
-       RotateMotor(OUT_A, -25, 20);
-       RotateMotor(OUT_B, 25,20);
+       RotateMotor(OUT_A, -75, 20);
+       RotateMotor(OUT_B, 75,20);
        while(SensorUS (IN_4)< dist)
         {
            dist = SensorUS (IN_4);
-           RotateMotor(OUT_A, -25, 20);
-           RotateMotor(OUT_B, 25,20);
+           RotateMotor(OUT_A, -75, 20);
+           RotateMotor(OUT_B, 75,20);
         }
     }
 }
@@ -122,13 +127,13 @@ void MoveForward(){
     SetSensorLowspeed(IN_4);
     if (SensorUS (IN_4)>30)
     {
-        while(SensorUS (IN_4) > 20 ) {
+        while(SensorUS (IN_4) > 25 ) {
             OnFwdSync(OUT_AB,75,0);
         }
     }
-    else if (SensorUS (IN_4)<15)
+    else if (SensorUS (IN_4)<20)
     {
-        while(SensorUS (IN_4) < 20 ) {
+        while(SensorUS (IN_4) < 25 ) {
             OnFwdSync(OUT_AB,-75,0);
         }
     }
@@ -136,16 +141,16 @@ void MoveForward(){
 }
 
 sub turnRight(int degree){
-   RotateMotor(OUT_A, -50, degree);
+   RotateMotor(OUT_A, -75, degree);
 }
 sub turnLeft(int degree){
-   RotateMotor(OUT_B, -50, degree);
+   RotateMotor(OUT_B, -75, degree);
 }
 
 void moveForward2(){
     //RotateMotorEx(OUT_AB, 100, 2520, 0, true, false);
 
-     RotateMotor(OUT_AB,75,2520);
+     RotateMotor(OUT_AB,75,2880);
     Off(OUT_AB);
 }
 
