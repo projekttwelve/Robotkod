@@ -1,0 +1,38 @@
+void FindWall();
+
+task main () {
+ FindWall();
+}
+
+void FindWall()
+{
+    SetSensorLowspeed(IN_4);
+    while(SensorUS (IN_4) > 53)
+    {
+           OnFwd(OUT_A,25);
+           OnFwd(OUT_B,-25);
+    }
+    float dist = SensorUS (IN_4);
+    RotateMotor(OUT_A, 25, 10);
+    RotateMotor(OUT_B, -25,10);
+    
+    if(SensorUS (IN_4)<dist){
+        while(SensorUS (IN_4)< dist)
+        {
+           dist = SensorUS (IN_4);
+           RotateMotor(OUT_A, 25, 20);
+           RotateMotor(OUT_B, -25,20);
+        }
+    }
+    else
+    {
+       RotateMotor(OUT_A, -25, 20);
+       RotateMotor(OUT_B, 25,20);
+       while(SensorUS (IN_4)< dist)
+        {
+           dist = SensorUS (IN_4);
+           RotateMotor(OUT_A, -25, 20);
+           RotateMotor(OUT_B, 25,20);
+        }
+    }
+}
