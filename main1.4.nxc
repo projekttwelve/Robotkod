@@ -2,7 +2,8 @@ void FindWall();
 void MoveForward();
 sub turnRight(int degree);
 sub turnLeft(int degree);
-void moveForwardnDrop();
+void moveForward2();
+void drop();
 
 task main(){
 
@@ -29,14 +30,16 @@ task main(){
         FindWall();
         MoveForward();
         turnRight(360);
-        moveForwardnDrop();
+        moveForward2();
+        drop();
      }
 
      if (count == 1){
         FindWall();
         MoveForward();
         turnLeft(360);
-        moveForwardnDrop();
+        moveForward2();
+        drop();
      }
 
      if (count == 2){
@@ -44,7 +47,8 @@ task main(){
         turnLeft(720);
         MoveForward();
         turnRight(360);
-        moveForwardnDrop();
+        moveForward2();
+        drop();
      }
 
      if (count == 3){
@@ -52,7 +56,8 @@ task main(){
         turnLeft(720);
         MoveForward();
         turnLeft(360);
-        moveForwardnDrop();
+        moveForward2();
+        drop();
      }
 }
 
