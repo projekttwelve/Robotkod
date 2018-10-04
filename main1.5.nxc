@@ -124,9 +124,18 @@ void FindWall()
 }
 void MoveForward(){
     SetSensorLowspeed(IN_4);
-    while(SensorUS (IN_4) > 15 ) {
-        OnFwdSync(OUT_AB,75,0);
-}
+    if (SensorUS (IN_4)>30)
+    {
+        while(SensorUS (IN_4) > 20 ) {
+            OnFwdSync(OUT_AB,75,0);
+        }
+    }
+    else if (SensorUS (IN_4)<15)
+    {
+        while(SensorUS (IN_4) < 20 ) {
+            OnFwdSync(OUT_AB,-75,0);
+        }
+    }
     Off(OUT_AB);
 }
 
