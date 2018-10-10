@@ -1,0 +1,157 @@
+void FindWall();
+void MoveForward();
+sub turnRight(int degree);
+sub turnLeft(int degree);
+void moveForward2();
+void drop();
+
+task main(){
+
+     SetSensorType(IN_1,SENSOR_TYPE_TOUCH);
+     SetSensorMode(IN_1,SENSOR_MODE_PULSE);
+
+     int count=0;
+     long t0;
+     t0 = CurrentTick();
+
+     while(CurrentTick()-t0 <3000);{
+         if (SENSOR_1 == 1){
+            count = 1;
+         }
+         if (SENSOR_1 == 2){
+            count = 2;
+         }
+         if (SENSOR_1 == 3){
+            count = 3;
+         }
+     }
+
+     if (count == 0){
+        FindWall();
+        MoveForward();
+        turnRight(360);
+        moveForward2();
+        FindWall();
+        MoveForward();
+        FindWall();
+        turnRight(360);
+        moveForward2();
+        FindWall();
+        MoveForward();
+        drop();
+     }
+
+     if (count == 1){
+        FindWall();
+        MoveForward();
+        turnLeft(300);
+        moveForward2();
+        FindWall();
+        MoveForward();
+        FindWall();
+        MoveForward();
+        turnLeft(300);
+        moveForward2();
+        FindWall();
+        MoveForward();
+        drop();
+     }
+
+     if (count == 2){
+        FindWall();
+        turnLeft(690);
+        MoveForward();
+        FindWall();
+        turnRight(360);
+        moveForward2();
+        FindWall();
+        MoveForward();
+        FindWall();
+        turnRight(360);
+        moveForward2();
+        FindWall();
+        MoveForward();
+        drop();
+     }
+
+     if (count == 3){
+        FindWall();
+        turnLeft(690);
+        MoveForward();
+        FindWall();
+        turnLeft(300);
+        moveForward2();
+        FindWall();
+        MoveForward();
+        turnLeft(300);
+        moveForward2();
+        FindWall();
+        MoveForward();
+        drop();
+     }
+}
+
+void FindWall()
+{
+    SetSensorLowspeed(IN_4);
+    while(SensorUS (IN_4) > 55)
+    {
+           OnFwd(OUT_A,25);
+           OnFwd(OUT_B,-25);
+    }
+    float dist = SensorUS (IN_4);
+    RotateMotorEx(OUT_AB, 75, 10, 100, true, false);
+
+    if(SensorUS (IN_4)<dist){
+        while(SensorUS (IN_4)< dist)
+        {
+           dist = SensorUS (IN_4);
+           RotateMotorEx(OUT_AB, 75, 10, 100, true, false);
+        }
+    }
+    else
+    {
+       RotateMotorEx(OUT_AB, -75, 20, 100, true, false);
+       while(SensorUS (IN_4)< dist)
+        {
+           dist = SensorUS (IN_4);
+           RotateMotorEx(OUT_AB, -75, 10, 100, true, false);
+        }
+    }
+}
+void MoveForward(){
+    SetSensorLowspeed(IN_4);
+    if (SensorUS (IN_4)>30)
+    {
+        while(SensorUS (IN_4) > 25 ) {
+            Wait(200);
+            OnFwdSync(OUT_AB,75,0);
+        }
+    }
+    else if (SensorUS (IN_4)<20)
+    {
+        while(SensorUS (IN_4) < 25 ) {
+            OnFwdSync(OUT_AB,-75,0);
+        }
+    }
+    Off(OUT_AB);
+}
+
+sub turnRight(int degree){
+   RotateMotor(OUT_A, -75, degree);
+}
+sub turnLeft(int degree){
+   RotateMotor(OUT_B, -75, degree);
+}
+
+void moveForward2(){
+    //RotateMotorEx(OUT_AB, 100, 2520, 0, true, false);
+
+     RotateMotor(OUT_AB,75,2880);
+    Off(OUT_AB);
+}
+
+void drop(){
+     OnFwd(OUT_C,-100);
+}
+
