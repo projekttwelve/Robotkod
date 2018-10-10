@@ -145,7 +145,6 @@ sub turnLeft(int degree){
 }
 
 void moveForward2(){
-    //RotateMotorEx(OUT_AB, 100, 2520, 0, true, false);
 
      RotateMotor(OUT_AB,75,2880);
     Off(OUT_AB);
